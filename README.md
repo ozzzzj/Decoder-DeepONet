@@ -1,5 +1,7 @@
 # DDON
-Model and code of Decoder DeepONet (DDON) for Electric field reconstruction from EFISH measurements. 
+Model and code of Decoder DeepONet (DDON) for Electric field reconstruction from EFISH measurements. This model is specifically designed for vertical polarization EFISH signals (for a vertically
+polarized probe beam).
+
 Related paper and analysis are available in DOI 10.1088/1361-6595/ae413f:
 
 To use the model, please cite:
