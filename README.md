@@ -34,7 +34,7 @@ To use the model and code, please cite:
 
    **Note**: The first grid point is recommended and should be tried first, as it may always show good predictions; otherwise, try the second to see if better results can be gotten.
 
-2. Then further normalize the z/zR by dividing zscale = 50, then the input grid should be:
+2. Then further normalize the $z/z_R$ by dividing $z_\mathrm{scale} = 50$, then the input grid should be:
    $z^\prime = z/z_R/50 = [-50:2:-24 -22:1:-16 -15:0.5:-1.5 -1:0.2:1 1.5:0.5:15 16:1:22 24:2:50]/50$;
    
    or
