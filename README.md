@@ -8,7 +8,7 @@ To use the model and code, please cite:
 
 Related paper and analysis are available at DOI 10.1088/1361-6595/ae413f.
 
-**Note** Scripts and model will be available soon.  
+**Note** Scripts and model will be available soon...  
 
 ## Environment recommended (model trained on):
 - Python 3.10.15
