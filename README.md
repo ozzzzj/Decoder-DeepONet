@@ -9,8 +9,8 @@ To use the model and code, please cite:
 
 
 ## Environment recommended (model trained on):
-Python 3.10.15
-TensorFlow-gpu 2.10.1
+- Python 3.10.15
+- TensorFlow-gpu 2.10.1
 
 
 ## Main user file:
