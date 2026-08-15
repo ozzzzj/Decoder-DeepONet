@@ -12,7 +12,6 @@ To use the model and code, please cite:
 - Python 3.10.15
 - TensorFlow-gpu 2.10.1
 
-
 ## Main user file:
 1. 'DeepONet_Resnet_Exp.py' % for script use
 2. 'DeepONet_Resnet_Exp.ipynb' % for jupyter editor use
@@ -21,3 +20,6 @@ To use the model and code, please cite:
 1. 'self_layers.py' %to import some self-defined layers
 2. 'PINN_Model_Predict.py' % run the model, output MATLAB .mat file, visualize the prediction
 3. 'self_Predict_ModelResult.py' % child file of the 'PINN_Model_Predict.py', including necessary code for Efield prediction
+
+## Model file (DDON) and model description
+- model log contains the DDON model for use
