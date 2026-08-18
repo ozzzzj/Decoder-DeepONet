@@ -28,20 +28,20 @@ Related paper and analysis are available at DOI 10.1088/1361-6595/ae413f.
 
 ## Instructions to use the model for Efield prediciton:
 1. To use the model, please first interpolate the EFISH file to the following grid via MATLAB:
-   $z/z_R = [-50:2:-24 /, -22:1:-16 /, -15:0.5:-1.5 /, -1:0.2:1 /, 1.5:0.5:15 /, 16:1:22 / 24:2:50]$;
+   $z/z_R = [-50:2:-24 \, -22:1:-16 \, -15:0.5:-1.5 \, -1:0.2:1 \, 1.5:0.5:15 \, 16:1:22 \, 24:2:50]$;
    
    or
    
-   $z/z_R = [0:0.2:1 1.5:0.5:15 16:1:22 24:2:50]$;
+   $z/z_R = [0:0.2:1 \, 1.5:0.5:15 \, 16:1:22 \, 24:2:50]$;
 
    **Note**: The first grid point is recommended and should be tried first, as it may always show good predictions; otherwise, try the second to see if better results can be gotten.
 
 2. Then further normalize the $z/z_R$ by dividing $z_\mathrm{scale} = 50$, then the input grid should be:
-   $z^\prime = z/z_R/50 = [-50:2:-24 -22:1:-16 -15:0.5:-1.5 -1:0.2:1 1.5:0.5:15 16:1:22 24:2:50]/50$;
+   $z^\prime = z/z_R/50 = [-50:2:-24 \, -22:1:-16 \, -15:0.5:-1.5 \, -1:0.2:1 \, 1.5:0.5:15 \, 16:1:22 24:2:50]/50$;
    
    or
    
-   $z^\prime = z/z_R/50 = [0:0.2:1 1.5:0.5:15 16:1:22 24:2:50]/50$;
+   $z^\prime = z/z_R/50 = [0:0.2:1 \, 1.5:0.5:15 \, 16:1:22 \, 24:2:50]/50$;
    
    **Note**: $z^\prime \in [-1,1]$
 
