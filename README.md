@@ -47,7 +47,7 @@ Related paper and analysis are available at DOI 10.1088/1361-6595/ae413f.
 
    The sampling grid outside your experiment range could be set to zero, as the DDON accepts zero input outside the key feature range. For how to quantify the key range, please refer to our paper. Please ensure the input range is no less than 4.2*FWHM of your input EFISH profile (normalized), although sometimes a smaller sampling range than the criterion also works.
 
-4. Normalize the measured EFISH profile (along the laser propagation axis, $z$) by its maximum:
+3. Normalize the measured EFISH profile (along the laser propagation axis, $z$) by its maximum:
    $P_\mathrm{norm}(z) = P(z)/P_\mathrm{max}$
 
-5. Import the mat file as structure files, and obtain the prediction. Or you can modify the code to fit your data structure as well.
+4. Import the mat file as structure files, and obtain the prediction. Or you can modify the code to fit your data structure as well.
