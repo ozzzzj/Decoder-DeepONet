@@ -24,7 +24,8 @@ Related paper and analysis are available at DOI 10.1088/1361-6595/ae413f.
 3. 'self_Predict_ModelResult.py' % child file of the 'PINN_Model_Predict.py', including necessary code for Efield prediction
 
 ## Model file (DDON) and model description
-- please download the DDON model via the release page for use (put it under the dir model log)
+- Please download the DDON model via the release page for use (put it under the dir model log)
+  https://github.com/ozzzzj/Decoder-DeepONet/releases/download/DDON/20260520_09-39_AM+model.Epoch-27_Loss-0.000404+MSE-0.000244+Batsize-.512.h5
 
 ## Instructions to use the model for Efield prediciton:
 1. To use the model, please first interpolate the EFISH file to the following grid via MATLAB:
