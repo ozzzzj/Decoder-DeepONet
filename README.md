@@ -43,7 +43,7 @@ Related paper and analysis are available at DOI 10.1088/1361-6595/ae413f.
    
    $z^\prime = z/z_R/50 = [-50:1:-2 \, -1:0.2:1 \, 2:1:50]/50$;
    
-   **Note**: $z^\prime \in [-1,1]$; crop the input EFISH profile if its normalized range (z/z_R/50) beyonds this range.
+   **Note**: $z^\prime \in [-1,1]$; crop the input EFISH profile if the normalized and scaled range (z/z_R/50) goes beyond this range.
 
    The sampling grid outside your experiment range could be set to zero, as the DDON accepts zero input outside the key feature range. For how to quantify the key range, please refer to our paper. Please ensure the input range is no less than 4.2*FWHM of your input EFISH profile (normalized), although sometimes a smaller sampling range than the criterion also works.
 
