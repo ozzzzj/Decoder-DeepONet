@@ -25,6 +25,9 @@ Related paper and analysis are available at DOI 10.1088/1361-6595/ae413f.
 
 ## Model file (DDON) and model description
 - Please download the DDON model via the release page for use (put it under the dir model log)
+
+  or
+  
   https://github.com/ozzzzj/Decoder-DeepONet/releases/download/DDON/20260520_09-39_AM+model.Epoch-27_Loss-0.000404+MSE-0.000244+Batsize-.512.h5
 
 ## Instructions to use the model for Efield prediciton:
