@@ -59,11 +59,9 @@ The related paper and analysis are available at the DOI 10.1088/1361-6595/ae413f
 
 6. Import the MAT file as structure files and obtain the prediction. Or you can modify the code to fit your data structure as well.
    
-   The MATLAB file structure is:
+   The MAT file structure is as follows:
    
     		            =====> $P_x$ ===> $[z,P_x]$	(experiment-measured EFISH and normalized z^\prime; dim: [109,2])
-   
     Profile_Px -->> =====> $u$             	(the phase mismatch value along $z$; dim: [109,1])
-   
     		            =====> $E_x$			(the phase mismatch value along $z$; dim: [109,1])
 
