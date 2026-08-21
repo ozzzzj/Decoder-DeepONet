@@ -50,7 +50,7 @@ The related paper and analysis are available at the DOI 10.1088/1361-6595/ae413f
    $u^\prime$ = $\Delta k \cdot z_\mathrm{R}$/-0.068. <br>
    **Note**: -0.068 is the max $u$ value from the training dataset. <br>
 
-6. Import the MAT file as structure files and obtain the prediction. Or you can modify the code to fit your data structure as well.
+5. Import the MAT file as structure files and obtain the prediction. Or you can modify the code to fit your data structure as well.
    
    The MAT file structure is as follows:<br>
    
