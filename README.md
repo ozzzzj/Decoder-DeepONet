@@ -61,7 +61,9 @@ Related paper and analysis are available at DOI 10.1088/1361-6595/ae413f.
    
    The MATLAB file structure is:
    
-    		            --- $P_x$ ---> $[z,P_x]$	(experiment-measured EFISH and normalized z^\prime; dim: [109,2])
-    Profile_Px -->> --- $u$             	(the phase mismatch value along $z$; dim: [109,1])
-    		            --- $E_x$			(the phase mismatch value along $z$; dim: [109,1])
+    		            ----- $P_x$ ---> $[z,P_x]$	(experiment-measured EFISH and normalized z^\prime; dim: [109,2])
+   
+    Profile_Px -->> ----- $u$             	(the phase mismatch value along $z$; dim: [109,1])
+   
+    		            ----- $E_x$			(the phase mismatch value along $z$; dim: [109,1])
 
