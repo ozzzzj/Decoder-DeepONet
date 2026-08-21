@@ -1,14 +1,14 @@
 # Decoder-DeepONet (DDON)
 Model and code of Decoder DeepONet (DDON) for Electric field reconstruction from EFISH measurements. This model is specifically designed for vertically polarized EFISH signals (for a vertically
-polarized probe beam).
+polarized probe beam). <br>
 
-To use the model and code, please cite:
+To use the model and code, please cite: <br>
 
-''Yang, Z., Sugeng, E.S., Alicherif, M. and Chng, T.L., 2026. An interpretable operator-learning model for electric field profile reconstruction in discharges based on the EFISH method. Plasma Sources Science and Technology, 35(2), p.025035.''
+''Yang, Z., Sugeng, E.S., Alicherif, M. and Chng, T.L., 2026. An interpretable operator-learning model for electric field profile reconstruction in discharges based on the EFISH method. Plasma Sources Science and Technology, 35(2), p.025035.'' <br>
 
-The related paper and analysis are available at the DOI 10.1088/1361-6595/ae413f.
+The related paper and analysis are available at the DOI 10.1088/1361-6595/ae413f. <br>
 
-**Note** Scripts and model will be available soon...  
+**Note** Scripts and model will be available soon...  <br>
 
 ## Environment recommended (model trained on):
 - Python 3.10.15
@@ -24,7 +24,7 @@ The related paper and analysis are available at the DOI 10.1088/1361-6595/ae413f
 3. 'self_Predict_ModelResult.py' % child file of the 'PINN_Model_Predict.py', including necessary code for Efield prediction
 
 ## Model file (DDON) and model description
-- Please download the DDON model via the release page for use (put it under the dir model log) or via:
+- Please download the DDON model via the release page for use (put it under the dir model log) or via: <br>
   https://github.com/ozzzzj/Decoder-DeepONet/releases/download/DDON/20260520_09-39_AM+model.Epoch-27_Loss-0.000404+MSE-0.000244+Batsize-.512.h5
 
 ## Instructions to use the model for Efield prediction:
@@ -32,12 +32,14 @@ The related paper and analysis are available at the DOI 10.1088/1361-6595/ae413f
    $z/z_R = [-50:2:-24 \, -22:1:-16 \, -15:0.5:-1.5 \, -1:0.2:1 \, 1.5:0.5:15 \, 16:1:22 \, 24:2:50]$; <br>
    or <br>
    $z/z_R = [-50:1:-2 \, -1:0.2:1 \, 2:1:50]$; <br>
+   
    **Note**: The first grid point is recommended and should be tried first, as it may always show good predictions; otherwise, try the second to see if better results can be gotten. <br>
 
 2. Then further normalize the $z/z_R$ by dividing $z_\mathrm{scale} = 50$, then the input grid should be:<br>
    $z^\prime = z/z_R/50 = [-50:2:-24 \, -22:1:-16 \, -15:0.5:-1.5 \, -1:0.2:1 \, 1.5:0.5:15 \, 16:1:22 24:2:50]/50$; <br>
    or <br>
    $z^\prime = z/z_R/50 = [-50:1:-2 \, -1:0.2:1 \, 2:1:50]/50$; <br>
+   
    **Note 1**: $z^\prime \in [-1,1]$; crop the input EFISH profile if the normalized and scaled range (z/z_R/50) goes beyond this range. <br>
    **Note 2**: The sampling grid outside your experiment range could be set to zero, as the DDON accepts zero input outside the key feature range. For how to quantify the key range, please refer to our paper. Please ensure the input range is at least 4.2*FWHM of your input EFISH profile (normalized), although sometimes a smaller sampling range than this criterion also works. <br>
 
