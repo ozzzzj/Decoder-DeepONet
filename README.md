@@ -6,7 +6,7 @@ To use the model and code, please cite:
 
 ''Yang, Z., Sugeng, E.S., Alicherif, M. and Chng, T.L., 2026. An interpretable operator-learning model for electric field profile reconstruction in discharges based on the EFISH method. Plasma Sources Science and Technology, 35(2), p.025035.''
 
-Related paper and analysis are available at DOI 10.1088/1361-6595/ae413f.
+The related paper and analysis are available at the DOI 10.1088/1361-6595/ae413f.
 
 **Note** Scripts and model will be available soon...  
 
@@ -46,7 +46,7 @@ Related paper and analysis are available at DOI 10.1088/1361-6595/ae413f.
    
    **Note 1**: $z^\prime \in [-1,1]$; crop the input EFISH profile if the normalized and scaled range (z/z_R/50) goes beyond this range.
 
-   **Note 2**: The sampling grid outside your experiment range could be set to zero, as the DDON accepts zero input outside the key feature range. For how to quantify the key range, please refer to our paper. Please ensure the input range is no less than 4.2*FWHM of your input EFISH profile (normalized), although sometimes a smaller sampling range than the criterion also works.
+   **Note 2**: The sampling grid outside your experiment range could be set to zero, as the DDON accepts zero input outside the key feature range. For how to quantify the key range, please refer to our paper. Please ensure the input range is at least 4.2*FWHM of your input EFISH profile (normalized), although sometimes a smaller sampling range than this criterion also works.
 
 3. Normalize the measured EFISH profile (along the laser propagation axis, $z$) by its maximum:
    $P_\mathrm{norm}(z) = P(z)/P_\mathrm{max}$
@@ -61,9 +61,9 @@ Related paper and analysis are available at DOI 10.1088/1361-6595/ae413f.
    
    The MATLAB file structure is:
    
-    		            --> $P_x$ ---> $[z,P_x]$	(experiment-measured EFISH and normalized z^\prime; dim: [109,2])
+    		            =====> $P_x$ ===> $[z,P_x]$	(experiment-measured EFISH and normalized z^\prime; dim: [109,2])
    
-    Profile_Px -->> --> $u$             	(the phase mismatch value along $z$; dim: [109,1])
+    Profile_Px -->> =====> $u$             	(the phase mismatch value along $z$; dim: [109,1])
    
-    		            --> $E_x$			(the phase mismatch value along $z$; dim: [109,1])
+    		            =====> $E_x$			(the phase mismatch value along $z$; dim: [109,1])
 
