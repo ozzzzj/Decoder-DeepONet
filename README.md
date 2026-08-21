@@ -27,7 +27,7 @@ Related paper and analysis are available at DOI 10.1088/1361-6595/ae413f.
 - Please download the DDON model via the release page for use (put it under the dir model log) or via:
   https://github.com/ozzzzj/Decoder-DeepONet/releases/download/DDON/20260520_09-39_AM+model.Epoch-27_Loss-0.000404+MSE-0.000244+Batsize-.512.h5
 
-## Instructions to use the model for Efield prediciton:
+## Instructions to use the model for Efield prediction:
 1. To use the model, please first interpolate the EFISH file to the following grid via MATLAB:
    $z/z_R = [-50:2:-24 \, -22:1:-16 \, -15:0.5:-1.5 \, -1:0.2:1 \, 1.5:0.5:15 \, 16:1:22 \, 24:2:50]$;
    
