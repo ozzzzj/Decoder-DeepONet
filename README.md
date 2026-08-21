@@ -38,7 +38,6 @@ The related paper and analysis are available at the DOI 10.1088/1361-6595/ae413f
    $z^\prime = z/z_R/50 = [-50:2:-24 \, -22:1:-16 \, -15:0.5:-1.5 \, -1:0.2:1 \, 1.5:0.5:15 \, 16:1:22 24:2:50]/50$; <br>
    or <br>
    $z^\prime = z/z_R/50 = [-50:1:-2 \, -1:0.2:1 \, 2:1:50]/50$; <br>
-   
    **Note 1**: $z^\prime \in [-1,1]$; crop the input EFISH profile if the normalized and scaled range (z/z_R/50) goes beyond this range. <br>
    **Note 2**: The sampling grid outside your experiment range could be set to zero, as the DDON accepts zero input outside the key feature range. For how to quantify the key range, please refer to our paper. Please ensure the input range is at least 4.2*FWHM of your input EFISH profile (normalized), although sometimes a smaller sampling range than this criterion also works. <br>
 
@@ -47,15 +46,24 @@ The related paper and analysis are available at the DOI 10.1088/1361-6595/ae413f
 
 4. Estimate the phase mismatch value $u$ through the wave-factor mismatch $\Delta k$ and Rayleigh range $z_\mathrm{R}$, and normalize it as input: <br>
    $u^\prime$ = $\Delta k \cdot z_\mathrm{R}$/-0.068. <br>
-   
-   **Note**: -0.068 is the max $u$ value from the training dataset.
+   **Note**: -0.068 is the max $u$ value from the training dataset. <br>
 
 6. Import the MAT file as structure files and obtain the prediction. Or you can modify the code to fit your data structure as well.
    
    The MAT file structure is as follows:<br>
    
-   | Parent       | Field | Description                                       | Dimension |<br>
-   |-------- -----|-------|---------------------------------------------------|-----------|<br>
-   | `Profile_Px` | $P_x$ | Experimentally measured EFISH and normalized $z'$ | [109, 2] |<br>
-   |              | $u$   | The phase mismatch value along $z$                | [109, 1] |<br>
-   |              | $E_x$ | The electric field value along $z$                | [109, 1] |<br>
+   <table>
+  <tr>
+    <td rowspan="3"><code>Profile_Px</code></td>
+    <td>$P_x$</td>
+    <td>$[z, P_x]$ (experimentally measured EFISH and normalized $z'$; dim: [109,2])</td>
+  </tr>
+  <tr>
+    <td>$u$</td>
+    <td>The phase mismatch value along $z$; dim: [109,1]</td>
+  </tr>
+  <tr>
+    <td>$E_x$</td>
+    <td>The electric field value along $z$; dim: [109,1]</td>
+  </tr>
+</table>
