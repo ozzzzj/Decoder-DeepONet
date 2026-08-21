@@ -52,11 +52,15 @@ Related paper and analysis are available at DOI 10.1088/1361-6595/ae413f.
    $P_\mathrm{norm}(z) = P(z)/P_\mathrm{max}$
 
 4. Estimate the phase mismatch value $u$ through the wave-factor mismatch $\Delta k$ and Rayleigh range $z_\mathrm{R}$, and normalize it as input:
+   
    $u^\prime$ = $\Delta k \cdot z_\mathrm{R}$/-0.068.
+   
    **Note**: -0.068 is the max $u$ value from the training dataset.
 
 6. Import the MAT file as structure files and obtain the prediction. Or you can modify the code to fit your data structure as well.
+   
    The MATLAB file structure is:
+   
     		            --- $P_x$ ---> $[z,P_x]$	(experiment-measured EFISH and normalized z^\prime; dim: [109,2])
     Profile_Px -->> --- $u$             	(the phase mismatch value along $z$; dim: [109,1])
     		            --- $E_x$			(the phase mismatch value along $z$; dim: [109,1])
