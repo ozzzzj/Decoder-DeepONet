@@ -44,11 +44,20 @@ Related paper and analysis are available at DOI 10.1088/1361-6595/ae413f.
    
    $z^\prime = z/z_R/50 = [-50:1:-2 \, -1:0.2:1 \, 2:1:50]/50$;
    
-   **Note**: $z^\prime \in [-1,1]$; crop the input EFISH profile if the normalized and scaled range (z/z_R/50) goes beyond this range.
+   **Note 1**: $z^\prime \in [-1,1]$; crop the input EFISH profile if the normalized and scaled range (z/z_R/50) goes beyond this range.
 
-   The sampling grid outside your experiment range could be set to zero, as the DDON accepts zero input outside the key feature range. For how to quantify the key range, please refer to our paper. Please ensure the input range is no less than 4.2*FWHM of your input EFISH profile (normalized), although sometimes a smaller sampling range than the criterion also works.
+   **Note 2**: The sampling grid outside your experiment range could be set to zero, as the DDON accepts zero input outside the key feature range. For how to quantify the key range, please refer to our paper. Please ensure the input range is no less than 4.2*FWHM of your input EFISH profile (normalized), although sometimes a smaller sampling range than the criterion also works.
 
 3. Normalize the measured EFISH profile (along the laser propagation axis, $z$) by its maximum:
    $P_\mathrm{norm}(z) = P(z)/P_\mathrm{max}$
 
-4. Import the mat file as structure files, and obtain the prediction. Or you can modify the code to fit your data structure as well.
+4. Estimate the phase mismatch value $u$ through the wave-factor mismatch $\Delta k$ and Rayleigh range $z_\mathrm{R}$, and normalize it as input:
+   $u^\prime$ = $\Delta k \cdot z_\mathrm{R}$/-0.068.
+   **Note**: -0.068 is the max $u$ value from the training dataset.
+
+6. Import the MAT file as structure files and obtain the prediction. Or you can modify the code to fit your data structure as well.
+   The MATLAB file structure is:
+    		            --- $P_x$ ---> $[z,P_x]$	(experiment-measured EFISH and normalized z^\prime; dim: [109,2])
+    Profile_Px -->> --- $u$             	(the phase mismatch value along $z$; dim: [109,1])
+    		            --- $E_x$			(the phase mismatch value along $z$; dim: [109,1])
+
