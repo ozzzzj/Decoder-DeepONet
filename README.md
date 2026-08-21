@@ -29,40 +29,33 @@ The related paper and analysis are available at the DOI 10.1088/1361-6595/ae413f
 
 ## Instructions to use the model for Efield prediction:
 1. To use the model, please first interpolate the EFISH file to the following grid via MATLAB:
-   $z/z_R = [-50:2:-24 \, -22:1:-16 \, -15:0.5:-1.5 \, -1:0.2:1 \, 1.5:0.5:15 \, 16:1:22 \, 24:2:50]$;
-   
-   or
-   
-   $z/z_R = [-50:1:-2 \, -1:0.2:1 \, 2:1:50]$;
+   $z/z_R = [-50:2:-24 \, -22:1:-16 \, -15:0.5:-1.5 \, -1:0.2:1 \, 1.5:0.5:15 \, 16:1:22 \, 24:2:50]$; <br>
+   or <br>
+   $z/z_R = [-50:1:-2 \, -1:0.2:1 \, 2:1:50]$; <br>
+   **Note**: The first grid point is recommended and should be tried first, as it may always show good predictions; otherwise, try the second to see if better results can be gotten. <br>
 
-   **Note**: The first grid point is recommended and should be tried first, as it may always show good predictions; otherwise, try the second to see if better results can be gotten.
-
-2. Then further normalize the $z/z_R$ by dividing $z_\mathrm{scale} = 50$, then the input grid should be:
-   $z^\prime = z/z_R/50 = [-50:2:-24 \, -22:1:-16 \, -15:0.5:-1.5 \, -1:0.2:1 \, 1.5:0.5:15 \, 16:1:22 24:2:50]/50$;
+2. Then further normalize the $z/z_R$ by dividing $z_\mathrm{scale} = 50$, then the input grid should be:<br>
+   $z^\prime = z/z_R/50 = [-50:2:-24 \, -22:1:-16 \, -15:0.5:-1.5 \, -1:0.2:1 \, 1.5:0.5:15 \, 16:1:22 24:2:50]/50$; <br>
+   or <br>
+   $z^\prime = z/z_R/50 = [-50:1:-2 \, -1:0.2:1 \, 2:1:50]/50$; <br>
    
-   or
-   
-   $z^\prime = z/z_R/50 = [-50:1:-2 \, -1:0.2:1 \, 2:1:50]/50$;
-   
-   **Note 1**: $z^\prime \in [-1,1]$; crop the input EFISH profile if the normalized and scaled range (z/z_R/50) goes beyond this range.
-
-   **Note 2**: The sampling grid outside your experiment range could be set to zero, as the DDON accepts zero input outside the key feature range. For how to quantify the key range, please refer to our paper. Please ensure the input range is at least 4.2*FWHM of your input EFISH profile (normalized), although sometimes a smaller sampling range than this criterion also works.
+   **Note 1**: $z^\prime \in [-1,1]$; crop the input EFISH profile if the normalized and scaled range (z/z_R/50) goes beyond this range. <br>
+   **Note 2**: The sampling grid outside your experiment range could be set to zero, as the DDON accepts zero input outside the key feature range. For how to quantify the key range, please refer to our paper. Please ensure the input range is at least 4.2*FWHM of your input EFISH profile (normalized), although sometimes a smaller sampling range than this criterion also works. <br>
 
 3. Normalize the measured EFISH profile (along the laser propagation axis, $z$) by its maximum:
    $P_\mathrm{norm}(z) = P(z)/P_\mathrm{max}$
 
-4. Estimate the phase mismatch value $u$ through the wave-factor mismatch $\Delta k$ and Rayleigh range $z_\mathrm{R}$, and normalize it as input:
-   
-   $u^\prime$ = $\Delta k \cdot z_\mathrm{R}$/-0.068.
+4. Estimate the phase mismatch value $u$ through the wave-factor mismatch $\Delta k$ and Rayleigh range $z_\mathrm{R}$, and normalize it as input: <br>
+   $u^\prime$ = $\Delta k \cdot z_\mathrm{R}$/-0.068. <br>
    
    **Note**: -0.068 is the max $u$ value from the training dataset.
 
 6. Import the MAT file as structure files and obtain the prediction. Or you can modify the code to fit your data structure as well.
    
-   The MAT file structure is as follows:
+   The MAT file structure is as follows:<br>
    
-   | Parent | Field | Description | Dimension |
-|--------|-------|-------------|-----------|
-| `Profile_Px` | $P_x$ | Experimentally measured EFISH and normalized $z'$ | [109, 2] |
-| | $u$ | The phase mismatch value along $z$ | [109, 1] |
-| | $E_x$ | The electric field value along $z$ | [109, 1] |
+   | Parent       | Field | Description                                       | Dimension |<br>
+   |-------- -----|-------|---------------------------------------------------|-----------|<br>
+   | `Profile_Px` | $P_x$ | Experimentally measured EFISH and normalized $z'$ | [109, 2] |<br>
+   |              | $u$   | The phase mismatch value along $z$                | [109, 1] |<br>
+   |              | $E_x$ | The electric field value along $z$                | [109, 1] |<br>
