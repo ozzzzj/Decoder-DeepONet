@@ -61,7 +61,8 @@ The related paper and analysis are available at the DOI 10.1088/1361-6595/ae413f
    
    The MAT file structure is as follows:
    
-    		           =====> $P_x$ ===> $\lbrack z, P_x \rbrack$	(experiment-measured EFISH and normalized z^\prime; dim: [109,2])
-    Profile_Px -->> =====> $u$             	(the phase mismatch value along $z$; dim: [109,1])
-    		            =====> $E_x$			(the phase mismatch value along $z$; dim: [109,1])
-
+   | Parent | Field | Description | Dimension |
+|--------|-------|-------------|-----------|
+| `Profile_Px` | $P_x$ | Experimentally measured EFISH and normalized $z'$ | [109, 2] |
+| | $u$ | The phase mismatch value along $z$ | [109, 1] |
+| | $E_x$ | The electric field value along $z$ | [109, 1] |
