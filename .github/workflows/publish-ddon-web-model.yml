@@ -1,0 +1,34 @@
+name: Publish DDON Web Model
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout api branch
+        uses: actions/checkout@v4
+        with:
+          ref: api
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install conversion dependencies
+        run: pip install -r requirements-onnx.txt
+
+      - name: Convert and verify DDON
+        run: python tools/convert_ddon_to_onnx.py
+
+      - name: Publish stable ONNX release asset
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release view DDON-WEB >/dev/null 2>&1 || gh release create DDON-WEB --title "DDON Web Model" --notes "ONNX model verified against the TensorFlow DDON model for browser inference."
+          gh release upload DDON-WEB model/DDON.onnx --clobber
