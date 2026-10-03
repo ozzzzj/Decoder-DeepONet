@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>EFISH E-field Reconstruction</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<main>
+  <h1>EFISH E-field Reconstruction</h1>
+  <p class="sub">Decoder-DeepONet (DDON)</p>
+  <section>
+    <label>Model</label>
+    <select disabled><option>DDON</option></select>
+    <label>Input data (CSV, exactly 109 rows: normalized z, normalized EFISH)</label>
+    <input id="file" type="file" accept=".csv,.txt">
+    <label>u</label>
+    <input id="u" type="number" step="any" value="-0.35">
+    <button id="run">Reconstruct E-field</button>
+    <p id="status"></p>
+  </section>
+  <section id="result" hidden>
+    <h2>Prediction</h2>
+    <canvas id="plot" width="900" height="360"></canvas>
+    <button id="download">Download CSV</button>
+  </section>
+</main>
+<script src="/static/app.js"></script>
+</body>
+</html>
