@@ -13,8 +13,8 @@
   <section>
     <label>Model</label>
     <select disabled><option>DDON</option></select>
-    <label>Input data (CSV, exactly 109 rows: normalized z, normalized EFISH)</label>
-    <input id="file" type="file" accept=".csv,.txt">
+    <label>Input data (.mat or CSV). MAT: Profile_Px.Px / Profile_Px.u / optional Profile_Px.Ex. CSV: exactly 109 rows of normalized z, normalized EFISH</label>
+    <input id="file" type="file" accept=".csv,.txt,.mat">
     <label>u</label>
     <input id="u" type="number" step="any" value="-0.35">
     <button id="run">Reconstruct E-field</button>
@@ -26,6 +26,6 @@
     <button id="download">Download CSV</button>
   </section>
 </main>
-<script src="https://cdn.jsdelivr.net/npm/onnxruntime-web@1.23.2/dist/ort.min.js"></script>\n<script src="./app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/onnxruntime-web@1.23.2/dist/ort.min.js"></script>\n<script src="https://cdn.jsdelivr.net/gh/KovacsGG/mat4js@master/dist/mat4js.read.min.js"></script>\n<script src="./app.js"></script>
 </body>
 </html>
