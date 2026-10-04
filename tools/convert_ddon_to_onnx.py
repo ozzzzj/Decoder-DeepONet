@@ -22,7 +22,7 @@ from self_layers import ResidualBlock_dense, Jitter
 
 MODEL_URL = (
     "https://github.com/ozzzzj/Decoder-DeepONet/releases/download/DDON/"
-    "20260520_09-39_AM%2Bmodel.Epoch-27_Loss-0.000404%2BMSE-0.000244%2BBatsize-.512.h5"
+    "20260520_model_Batsize-512.h5"
 )
 
 
