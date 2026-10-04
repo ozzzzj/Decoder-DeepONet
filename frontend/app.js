@@ -129,28 +129,62 @@ function drawSeries(ctx,x,y,p,w,h,xmin,xmax,ymin,ymax,stroke) {
   y.forEach((v,i)=>{
     const px=p+(x[i]-xmin)/(xmax-xmin||1)*w, py=p+h-(v-ymin)/dy*h;
     i ? ctx.lineTo(px,py) : ctx.moveTo(px,py);
-  }); ctx.stroke();
+  });
+  ctx.stroke();
 }
+
+function niceNumber(v) {
+  if (Math.abs(v) >= 100 || (Math.abs(v) > 0 && Math.abs(v) < 0.01)) return v.toExponential(1);
+  return Number(v.toFixed(2)).toString();
+}
+
+function drawAxes(ctx,p,w,h,xmin,xmax,ymin,ymax) {
+  const ticks=5;
+  ctx.strokeStyle="#222"; ctx.fillStyle="#222"; ctx.lineWidth=1; ctx.font="12px sans-serif";
+  ctx.beginPath(); ctx.moveTo(p,p); ctx.lineTo(p,p+h); ctx.lineTo(p+w,p+h); ctx.stroke();
+
+  ctx.textAlign="center"; ctx.textBaseline="top";
+  for(let i=0;i<=ticks;i++){
+    const t=i/ticks, px=p+t*w, value=xmin+t*(xmax-xmin);
+    ctx.beginPath(); ctx.moveTo(px,p+h); ctx.lineTo(px,p+h+5); ctx.stroke();
+    ctx.fillText(niceNumber(value),px,p+h+8);
+  }
+
+  ctx.textAlign="right"; ctx.textBaseline="middle";
+  for(let i=0;i<=ticks;i++){
+    const t=i/ticks, py=p+h-t*h, value=ymin+t*(ymax-ymin);
+    ctx.beginPath(); ctx.moveTo(p-5,py); ctx.lineTo(p,py); ctx.stroke();
+    ctx.fillText(niceNumber(value),p-8,py);
+  }
+}
+
 function draw(x, y, trueY, inputP) {
-  const c=document.getElementById("plot"),ctx=c.getContext("2d"),p=45,w=c.width-2*p,h=c.height-2*p;
+  const c=document.getElementById("plot"),ctx=c.getContext("2d");
+  const left=65,right=25,top=45,bottom=55;
+  const p=left,w=c.width-left-right,h=c.height-top-bottom, yTop=top;
+
   ctx.clearRect(0,0,c.width,c.height);
-  ctx.strokeStyle="#222";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(p,p);ctx.lineTo(p,p+h);ctx.lineTo(p+w,p+h);ctx.stroke();
 
-  const allY = y.concat(inputP || []).concat(trueY || []);
-  const xmin=Math.min(...x),xmax=Math.max(...x),ymin=Math.min(...allY),ymax=Math.max(...allY);
+  const allY=y.concat(inputP||[]).concat(trueY||[]);
+  let xmin=Math.min(...x),xmax=Math.max(...x),ymin=Math.min(...allY),ymax=Math.max(...allY);
+  if(ymin===ymax){ymin-=0.5;ymax+=0.5;}
 
-  if(inputP) drawSeries(ctx,x,inputP,p,w,h,xmin,xmax,ymin,ymax,"#222222");
-  drawSeries(ctx,x,y,p,w,h,xmin,xmax,ymin,ymax,"#1769aa");
-  if(trueY) drawSeries(ctx,x,trueY,p,w,h,xmin,xmax,ymin,ymax,"#c0392b");
+  drawAxes(ctx,left,w,h,xmin,xmax,ymin,ymax);
 
-  ctx.fillStyle="#222";ctx.font="14px sans-serif";
-  ctx.fillText("Normalized z",c.width/2-35,c.height-8);
-  ctx.save();ctx.translate(15,c.height/2+40);ctx.rotate(-Math.PI/2);ctx.fillText("Normalized P / E",0,0);ctx.restore();
+  if(inputP) drawSeries(ctx,x,inputP,left,w,h,xmin,xmax,ymin,ymax,"#222222");
+  drawSeries(ctx,x,y,left,w,h,xmin,xmax,ymin,ymax,"#d62728");
+  if(trueY) drawSeries(ctx,x,trueY,left,w,h,xmin,xmax,ymin,ymax,"#1769aa");
 
-  let lx=p+10;
-  if(inputP){ctx.fillStyle="#222222";ctx.fillText("Input P",lx,p+16);lx+=90;}
-  ctx.fillStyle="#1769aa";ctx.fillText("DDON prediction E",lx,p+16);lx+=145;
-  if(trueY){ctx.fillStyle="#c0392b";ctx.fillText("Benchmark Ex",lx,p+16);}
+  ctx.fillStyle="#222"; ctx.font="14px sans-serif"; ctx.textAlign="center"; ctx.textBaseline="alphabetic";
+  ctx.fillText("Normalized z",left+w/2,c.height-8);
+  ctx.save(); ctx.translate(16,yTop+h/2); ctx.rotate(-Math.PI/2);
+  ctx.fillText("Normalized P / E",0,0); ctx.restore();
+
+  ctx.font="14px sans-serif"; ctx.textAlign="left";
+  let lx=left+10;
+  if(inputP){ctx.fillStyle="#222222";ctx.fillText("Input P",lx,20);lx+=90;}
+  ctx.fillStyle="#d62728";ctx.fillText("DDON prediction E",lx,20);lx+=145;
+  if(trueY){ctx.fillStyle="#1769aa";ctx.fillText("Benchmark Ex",lx,20);}
 }
 document.getElementById("download").addEventListener("click",()=>{
   if(!prediction)return;
