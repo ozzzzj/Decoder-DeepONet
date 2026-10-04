@@ -1,79 +1,133 @@
 # Decoder-DeepONet (DDON)
-Model and code of Decoder DeepONet (DDON) for Electric field reconstruction from EFISH measurements. This model is specifically designed for vertically polarized EFISH signals (for a vertically
-polarized probe beam). <br>
 
-To use the model and code, please cite: <br>
+Model and code of Decoder DeepONet (DDON) for electric-field reconstruction from EFISH measurements. This model is specifically designed for vertically polarized EFISH signals (for a vertically polarized probe beam).
 
-''Yang, Z., Sugeng, E.S., Alicherif, M. and Chng, T.L., 2026. An interpretable operator-learning model for electric field profile reconstruction in discharges based on the EFISH method. Plasma Sources Science and Technology, 35(2), p.025035.'' <br>
+## Citation
 
-The related paper and analysis are available at the DOI 10.1088/1361-6595/ae413f. <br>
+If you use DDON, the web tool, or results generated with this model, please cite:
 
-**Note** Scripts and model will be available soon...  <br>
+> Yang, Z., Sugeng, E. S., Alicherif, M. and Chng, T. L. (2026). An interpretable operator-learning model for electric field profile reconstruction in discharges based on the EFISH method. *Plasma Sources Science and Technology*, **35**(2), 025035.
 
-## Online Web App
+DOI: [10.1088/1361-6595/ae413f](https://doi.org/10.1088/1361-6595/ae413f)
 
-DDON can be run directly in a web browser without installing Python or TensorFlow:
+## Choose how to use DDON
+
+### 1. Online Web App — no installation
+
+Run DDON directly in a web browser:
 
 **[Launch the DDON E-field Reconstruction Web App](https://ozzzzj.github.io/Decoder-DeepONet/)**
 
-The web app supports preprocessed CSV and MATLAB MAT inputs and performs inference locally in the browser using the ONNX version of DDON.
+The web app supports preprocessed CSV and MATLAB MAT inputs. Inference is performed locally in the browser using ONNX Runtime Web.
 
-## Environment recommended (model trained on):
+For DDON, the EFISH polarization is fixed to **vertical**.
+
+### 2. Local Packaged Inference — lightweight ONNX Runtime
+
+This mode provides local DDON inference without TensorFlow. After downloading/cloning the repository:
+
+```bash
+pip install .
+```
+
+Python interface:
+
+```python
+from ddon import DDON
+
+model = DDON()
+E = model.predict(values, u=-0.35)
+```
+
+Command-line interface:
+
+```bash
+ddon predict Efish_vertical.mat -o prediction.csv
+```
+
+For MATLAB MAT input, `Profile_Px.Px` and `Profile_Px.u` are read automatically. For CSV/TXT input, provide `u` explicitly:
+
+```bash
+ddon predict input.csv --u -0.35 -o prediction.mat
+```
+
+The verified ONNX model is downloaded automatically on first use and cached locally. This mode requires NumPy, SciPy, and ONNX Runtime.
+
+### 3. Full Python Research Mode — TensorFlow
+
+Use the original TensorFlow model and scripts for full customization, validation, visualization, model analysis, and research workflows. The original filenames are retained.
+
+## Recommended environment for the original TensorFlow model
+
 - Python 3.10.15
 - TensorFlow-gpu 2.10.1
 
-## Main user file:
-1. 'DeepONet_Resnet_Exp.py' % for script use
-2. 'DeepONet_Resnet_Exp.ipynb' % for jupyter editor use
+## Main user file
 
-## Script files:
-1. 'self_layers.py' %to import some self-defined layers
-2. 'PINN_Model_Predict.py' % run the model, output MATLAB .mat file, visualize the prediction
-3. 'self_Predict_ModelResult.py' % child file of the 'PINN_Model_Predict.py', including necessary code for Efield prediction
+- `DeepONet_Resnet_Exp_vFinal.py`
 
-## Model file (DDON) and model description
-- Please download the DDON model via the release page for use (put it under the dir model log) or via: <br>
-  https://github.com/ozzzzj/Decoder-DeepONet/releases/download/DDON/20260520_model_Batsize-512.h5
+## Script files
 
-## Instructions to use the model for Efield prediction:
-1. To use the model, please first interpolate the EFISH file to the following grid via MATLAB:
-   $z/z_R = [-50:2:-24 \, -22:1:-16 \, -15:0.5:-1.5 \, -1:0.2:1 \, 1.5:0.5:15 \, 16:1:22 \, 24:2:50]$; <br>
-   or <br>
-   $z/z_R = [-50:1:-2 \, -1:0.2:1 \, 2:1:50]$; <br>
-   
-   **Note**: The first grid point is recommended and should be tried first, as it may always show good predictions; otherwise, try the second to see if better results can be gotten. <br>
+- `self_layers.py` — self-defined model layers.
+- `PINN_Model_Predict.py` — runs model prediction, visualization, and optional MATLAB output.
+- `self_Predict_ModelResult.py` — prediction/evaluation helper used by `PINN_Model_Predict.py`.
 
-2. Then further normalize the $z/z_R$ by dividing $z_\mathrm{scale} = 50$, then the input grid should be:<br>
-   $z^\prime = z/z_R/50 = [-50:2:-24 \, -22:1:-16 \, -15:0.5:-1.5 \, -1:0.2:1 \, 1.5:0.5:15 \, 16:1:22 24:2:50]/50$; <br>
-   or <br>
-   $z^\prime = z/z_R/50 = [-50:1:-2 \, -1:0.2:1 \, 2:1:50]/50$; <br>
-   
-   **Note 1**: $z^\prime \in [-1,1]$; crop the input EFISH profile if the normalized and scaled range (z/z_R/50) goes beyond this range. <br>
-   **Note 2**: The sampling grid outside your experiment range could be set to zero, as the DDON accepts zero input outside the key feature range. For how to quantify the key range, please refer to our paper. Please ensure the input range is at least 4.2*FWHM of your input EFISH profile (normalized), although sometimes a smaller sampling range than this criterion also works. <br>
+## Model file
 
-3. Normalize the measured EFISH profile (along the laser propagation axis, $z$) by its maximum:
-   $P_\mathrm{norm}(z) = P(z)/P_\mathrm{max}$
+The current DDON TensorFlow model is available from the DDON release:
 
-4. Estimate the phase mismatch value $u$ through the wave-factor mismatch $\Delta k$ and Rayleigh range $z_\mathrm{R}$, and normalize it as input: <br>
-   $u^\prime$ = $\Delta k \cdot z_\mathrm{R}$/-1. <br>
-   **Note**: -1 is the normalization scale used for the current DDON model. <br>
+**[Download 20260520_model_Batsize-512.h5](https://github.com/ozzzzj/Decoder-DeepONet/releases/download/DDON/20260520_model_Batsize-512.h5)**
 
-5. Import the MAT file as structure files and obtain the prediction. Or you can modify the code to fit your data structure as well.
-   
-   The MAT file structure is as follows:<br>
-   
-   <table>
-  <tr>
-    <td rowspan="3"><code>Profile_Px</code></td>
-    <td>$P_x$</td>
-    <td>$[z, P_x]$ (experimentally measured EFISH and normalized $z'$; dim: [109,2])</td>
-  </tr>
-  <tr>
-    <td>$u$</td>
-    <td>The phase mismatch value along $z$; dim: [109,1]</td>
-  </tr>
-  <tr>
-    <td>$E_x$</td>
-    <td>The electric field value along $z$; dim: [109,1]</td>
-  </tr>
-</table>
+For the original TensorFlow sample, place the model under the `model log` directory.
+
+## Input preprocessing and E-field prediction
+
+1. Interpolate the EFISH profile to the recommended grid:
+
+   $z/z_R = [-50:2:-24 \, -22:1:-16 \, -15:0.5:-1.5 \, -1:0.2:1 \, 1.5:0.5:15 \, 16:1:22 \, 24:2:50]$
+
+   or
+
+   $z/z_R = [-50:1:-2 \, -1:0.2:1 \, 2:1:50]$.
+
+   The first grid is recommended and should be tried first.
+
+2. Normalize the coordinate using $z_{\mathrm{scale}}=50$:
+
+   $z' = (z/z_R)/50$,
+
+   so that $z' \in [-1,1]$. Crop the input EFISH profile if the normalized/scaled range extends beyond this interval.
+
+   Sampling points outside the experimental range may be set to zero. The input range should preferably cover at least $4.2\times\mathrm{FWHM}$ of the normalized EFISH profile.
+
+3. Normalize the measured EFISH profile along the laser propagation axis:
+
+   $P_{\mathrm{norm}}(z)=P(z)/P_{\max}$.
+
+4. Estimate the phase-mismatch parameter:
+
+   $u=\Delta k\,z_R$.
+
+   For the **current DDON model**, normalize the model input using
+
+   $u' = u/(-1)=\Delta k\,z_R/(-1)$.
+
+   The normalization scale used by the current model is therefore **-1**.
+
+5. Import the preprocessed data and obtain the DDON prediction.
+
+### MATLAB input structure
+
+| Structure | Field | Description |
+|---|---|---|
+| `Profile_Px` | $P_x$ | $[z,P_x]$: normalized coordinate and experimentally measured/normalized EFISH; shape $[109,2]$ |
+| `Profile_Px` | $u$ | Phase-mismatch parameter; the web/local interfaces read the raw value and apply the current DDON normalization |
+| `Profile_Px` | $E_x$ / `Ex` | Optional normalized electric-field benchmark for comparison; 109 points |
+
+## Web and ONNX model
+
+The browser and lightweight local modes use an ONNX version of DDON that is numerically verified against the TensorFlow model during the GitHub Actions conversion workflow.
+
+## License and copyright
+
+© 2026 Zhijian Yang. All rights reserved.
