@@ -55,8 +55,8 @@ The web app supports preprocessed CSV and MATLAB MAT inputs and performs inferen
    $P_\mathrm{norm}(z) = P(z)/P_\mathrm{max}$
 
 4. Estimate the phase mismatch value $u$ through the wave-factor mismatch $\Delta k$ and Rayleigh range $z_\mathrm{R}$, and normalize it as input: <br>
-   $u^\prime$ = $\Delta k \cdot z_\mathrm{R}$/-0.068. <br>
-   **Note**: -0.068 is the max $u$ value from the training dataset. <br>
+   $u^\prime$ = $\Delta k \cdot z_\mathrm{R}$/-1. <br>
+   **Note**: -1 is the normalization scale used for the current DDON model. <br>
 
 5. Import the MAT file as structure files and obtain the prediction. Or you can modify the code to fit your data structure as well.
    
