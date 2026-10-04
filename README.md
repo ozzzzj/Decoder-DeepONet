@@ -150,15 +150,17 @@ For the original TensorFlow sample, place the model under the `model log` direct
 
    $P_{\mathrm{norm}}(z)=P(z)/P_{\max}$.
 
-4. Estimate the phase-mismatch parameter:
+4. Estimate the physical phase-mismatch parameter:
 
    $u=\Delta k\,z_R$.
 
-   For the **current DDON model**, normalize the model input using
+   **Input the physical value of $u$ directly. Do not normalize $u$ before input.**
 
-   $u' = u/(-1)=\Delta k\,z_R/(-1)$.
+   The current DDON model automatically applies the required internal normalization,
 
-   The normalization scale used by the current model is therefore **-1**.
+   $u' = u/(-1)$,
+
+   before inference.
 
 5. Import the preprocessed data and obtain the DDON prediction.
 
