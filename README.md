@@ -38,20 +38,6 @@ The recommended input is a MATLAB MAT file containing:
 - `Profile_Px.u`: phase-mismatch parameter $u$, size $(109,1)$
 - `Profile_Px.Ex`: normalized benchmark electric field $E_x$, size $(109,1)$, optional
 
-Run DDON directly from the command line:
-
-```bash
-ddon predict Efish_vertical.mat -o prediction.mat
-```
-
-or save the reconstructed field as CSV:
-
-```bash
-ddon predict Efish_vertical.mat -o prediction.csv
-```
-
-For MAT input, `Profile_Px.Px` and `Profile_Px.u` are read automatically, so `--u` does not need to be specified.
-
 A typical MATLAB input file can be prepared as:
 
 ```matlab
@@ -78,12 +64,6 @@ E = model.predict(
 )
 
 print(E)
-```
-
-For CSV/TXT command-line input, provide $u$ explicitly:
-
-```bash
-ddon predict input.csv --u -0.35 -o prediction.mat
 ```
 
 The verified ONNX model is downloaded automatically on first use and cached locally. This mode requires NumPy, SciPy, and ONNX Runtime.
