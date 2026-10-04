@@ -114,7 +114,7 @@ document.getElementById("run").addEventListener("click", async () => {
     const results = await s.run(feeds);
     const efield = Array.from(results[s.outputNames[0]].data);
     prediction = {model:"ddon", z:rows.map(r=>r[0]), efield};
-    draw(prediction.z, prediction.efield, yTrue);
+    draw(prediction.z, prediction.efield, yTrue, rows.map(r => r[1]));
     document.getElementById("result").hidden=false;
     statusEl.textContent="Prediction complete (computed locally in your browser)." + (yTrue ? " Ex shown for comparison." : "");
   } catch(err) {
@@ -131,18 +131,26 @@ function drawSeries(ctx,x,y,p,w,h,xmin,xmax,ymin,ymax,stroke) {
     i ? ctx.lineTo(px,py) : ctx.moveTo(px,py);
   }); ctx.stroke();
 }
-function draw(x,y,trueY) {
+function draw(x, y, trueY, inputP) {
   const c=document.getElementById("plot"),ctx=c.getContext("2d"),p=45,w=c.width-2*p,h=c.height-2*p;
   ctx.clearRect(0,0,c.width,c.height);
   ctx.strokeStyle="#222";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(p,p);ctx.lineTo(p,p+h);ctx.lineTo(p+w,p+h);ctx.stroke();
-  const allY=trueY ? y.concat(trueY) : y;
+
+  const allY = y.concat(inputP || []).concat(trueY || []);
   const xmin=Math.min(...x),xmax=Math.max(...x),ymin=Math.min(...allY),ymax=Math.max(...allY);
+
+  if(inputP) drawSeries(ctx,x,inputP,p,w,h,xmin,xmax,ymin,ymax,"#222222");
   drawSeries(ctx,x,y,p,w,h,xmin,xmax,ymin,ymax,"#1769aa");
   if(trueY) drawSeries(ctx,x,trueY,p,w,h,xmin,xmax,ymin,ymax,"#c0392b");
-  ctx.fillStyle="#222";ctx.font="14px sans-serif";ctx.fillText("Normalized z",c.width/2-35,c.height-8);
-  ctx.save();ctx.translate(15,c.height/2+40);ctx.rotate(-Math.PI/2);ctx.fillText("E-field",0,0);ctx.restore();
-  ctx.fillStyle="#1769aa";ctx.fillText("DDON prediction",p+10,p+16);
-  if(trueY){ctx.fillStyle="#c0392b";ctx.fillText("Ex",p+140,p+16);}
+
+  ctx.fillStyle="#222";ctx.font="14px sans-serif";
+  ctx.fillText("Normalized z",c.width/2-35,c.height-8);
+  ctx.save();ctx.translate(15,c.height/2+40);ctx.rotate(-Math.PI/2);ctx.fillText("Normalized P / E",0,0);ctx.restore();
+
+  let lx=p+10;
+  if(inputP){ctx.fillStyle="#222222";ctx.fillText("Input P",lx,p+16);lx+=90;}
+  ctx.fillStyle="#1769aa";ctx.fillText("DDON prediction E",lx,p+16);lx+=145;
+  if(trueY){ctx.fillStyle="#c0392b";ctx.fillText("Benchmark Ex",lx,p+16);}
 }
 document.getElementById("download").addEventListener("click",()=>{
   if(!prediction)return;
