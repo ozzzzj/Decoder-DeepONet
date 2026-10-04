@@ -26,17 +26,24 @@
     <label>Model</label>
     <select disabled><option>DDON</option></select>
 
-    <label>
-      Input data (.mat or CSV). <br>
-      
-      MAT: <code>Profile_Px.Px</code> (normalized EFISH \(P\)) /
+    <label>Input data (.mat or CSV)</label>
+
+    <p>
+      <strong>MAT:</strong>
+      <code>Profile_Px.Px</code> (normalized EFISH \(P\)) /
       <code>Profile_Px.u</code> (phase-mismatch parameter \(u\)) /
-      optional <code>Profile_Px.Ex</code> (normalized simulation benchmark \(E\), if available). <br>
-      
-      CSV: exactly 109 rows of normalized \(z\), normalized EFISH \(P\). <br>
-      
-      Note: The input profiles \(P\), \(E\), and coordinate \(z\) should be pre-normalized following the preprocessing procedure in README.md.
-    </label>
+      optional <code>Profile_Px.Ex</code> (normalized simulation benchmark \(E\), if available).
+    </p>
+
+    <p>
+      <strong>CSV:</strong>
+      exactly 109 rows of normalized \(z\) and normalized EFISH \(P\).
+    </p>
+
+    <p>
+      <strong>Note:</strong>
+      The input profiles \(P\), \(E\), and coordinate \(z\) should be pre-normalized following the preprocessing procedure in <code>README.md</code>.
+    </p>
 
     <input id="file" type="file" accept=".csv,.txt,.mat">
 
