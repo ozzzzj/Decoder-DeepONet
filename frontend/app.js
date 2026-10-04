@@ -171,7 +171,26 @@ function draw(x, y, trueY, inputP) {
 
   drawAxes(ctx,left,w,h,xmin,xmax,ymin,ymax);
 
-  if(inputP) drawSeries(ctx,x,inputP,left,w,h,xmin,xmax,ymin,ymax,"#222222");
+  if(inputP) {
+    // MATLAB/Matplotlib-style ko-- : black dashed line with open-circle markers.
+    ctx.save();
+    ctx.setLineDash([6,4]);
+    drawSeries(ctx,x,inputP,left,w,h,xmin,xmax,ymin,ymax,"#222222");
+    ctx.restore();
+
+    const dy=(ymax-ymin)||1;
+    ctx.strokeStyle="#222222";
+    ctx.fillStyle="#ffffff";
+    ctx.lineWidth=1.4;
+    inputP.forEach((v,i)=>{
+      const px=left+(x[i]-xmin)/(xmax-xmin||1)*w;
+      const py=left+h-(v-ymin)/dy*h;
+      ctx.beginPath();
+      ctx.arc(px,py,3.2,0,2*Math.PI);
+      ctx.fill();
+      ctx.stroke();
+    });
+  }
   drawSeries(ctx,x,y,left,w,h,xmin,xmax,ymin,ymax,"#d62728");
   if(trueY) drawSeries(ctx,x,trueY,left,w,h,xmin,xmax,ymin,ymax,"#1769aa");
 
@@ -182,7 +201,7 @@ function draw(x, y, trueY, inputP) {
 
   ctx.font="14px sans-serif"; ctx.textAlign="left";
   let lx=left+10;
-  if(inputP){ctx.fillStyle="#222222";ctx.fillText("Input P",lx,20);lx+=90;}
+  if(inputP){ctx.fillStyle="#222222";ctx.fillText("Input P (ko--)",lx,20);lx+=120;}
   ctx.fillStyle="#d62728";ctx.fillText("DDON prediction E",lx,20);lx+=145;
   if(trueY){ctx.fillStyle="#1769aa";ctx.fillText("Benchmark Ex",lx,20);}
 }
