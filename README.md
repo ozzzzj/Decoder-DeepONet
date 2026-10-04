@@ -170,9 +170,9 @@ For the original TensorFlow sample, place the model under the `model log` direct
 
 | Structure | Field | Description |
 |---|---|---|
-| `Profile_Px` | `Px/max(Px)` | $[z,\,P_x/\max(P_x)]$: normalized coordinate and normalized EFISH; shape $[109,2]$ |
+| `Profile_Px` | `Px` | $[z,\,P_x/\max(P_x)]$: normalized coordinate and normalized EFISH; shape $[109,2]$ |
 | `Profile_Px` | $u$ | Physical phase-mismatch parameter $u=\Delta k \times z_R$; the web/local interfaces read the physical value and apply the required DDON normalization internally |
-| `Profile_Px` | `Ex/max(Ex)` | Optional normalized electric-field benchmark $E_x/\max(E_x)$ for comparison; shape $[109,1]$ |
+| `Profile_Px` | `Ex` | Optional normalized electric-field benchmark $E_x/\max(E_x)$ for comparison; shape $[109,1]$ |
 
 ## Web and ONNX model
 
