@@ -32,6 +32,13 @@ jobs:
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
+      - name: Download DDON web model
+        run: |
+          curl -L --fail --retry 3 \
+            https://github.com/ozzzzj/Decoder-DeepONet/releases/download/DDON-WEB/DDON.onnx \
+            -o frontend/DDON.onnx
+          test -s frontend/DDON.onnx
+
       - name: Upload frontend
         uses: actions/upload-pages-artifact@v3
         with:
