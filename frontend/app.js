@@ -201,7 +201,7 @@ function draw(x, y, trueY, inputP) {
 
   ctx.font="14px sans-serif"; ctx.textAlign="left";
   let lx=left+10;
-  if(inputP){ctx.fillStyle="#222222";ctx.fillText("Input P (ko--)",lx,20);lx+=120;}
+  if(inputP){ctx.fillStyle="#222222";ctx.fillText("Input P",lx,20);lx+=90;}
   ctx.fillStyle="#d62728";ctx.fillText("DDON prediction E",lx,20);lx+=145;
   if(trueY){ctx.fillStyle="#1769aa";ctx.fillText("Benchmark Ex",lx,20);}
 }
