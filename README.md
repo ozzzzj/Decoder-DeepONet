@@ -33,7 +33,7 @@ pip install ddon-efish
 **[View `ddon-efish` on PyPI](https://pypi.org/project/ddon-efish/)**
 
 
-#### MATLAB MAT input (recommended)
+#### MATLAB MAT input (Recommended)
 
 The recommended input is a MATLAB MAT file containing:
 
