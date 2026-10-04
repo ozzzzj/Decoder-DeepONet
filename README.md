@@ -109,9 +109,10 @@ ddon predict input.csv --u -0.35 -o prediction.mat
 
 The ONNX model is downloaded automatically on first use and cached locally. This mode requires only NumPy, SciPy, and ONNX Runtime.
 
-### 3. Full Python Research Mode — TensorFlow
+### 3. Full Python Research Code — To be released
 
-Use the original TensorFlow model and scripts below for full customization, validation, visualization, model analysis, and research workflows. The original filenames and workflow are retained.
+The full TensorFlow research implementation, including the original prediction, evaluation, and analysis workflow, is not included in the current public release and will be released separately in the future.
+
 
 ## Environment recommended (model trained on):
 - Python 3.10.15
