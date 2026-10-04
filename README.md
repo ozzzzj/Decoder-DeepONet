@@ -34,9 +34,18 @@ Python interface:
 
 ```python
 from ddon import DDON
+import numpy as np
+
+values = np.loadtxt("input.csv", delimiter=",")
 
 model = DDON()
-E = model.predict(values, u=-0.35)
+
+E = model.predict(
+    values=values,
+    u=-0.35
+)
+
+print(E)
 ```
 
 Command-line interface:
