@@ -122,7 +122,7 @@ DDON uses semantic model versions in the form `vMAJOR.MINOR.PATCH` (for example,
 
 The current DDON TensorFlow model is available from the DDON release:
 
-**[Download 20260520_model_Batsize-512.h5](https://github.com/ozzzzj/Decoder-DeepONet/releases/download/DDON/20260520_model_Batsize-512.h5)**
+**[Download DDON-v1.0.0.h5](https://github.com/ozzzzj/Decoder-DeepONet/releases/download/DDON-v1.0.0/DDON.h5)**
 
 For the original TensorFlow sample, place the model under the `model log` directory.
 
