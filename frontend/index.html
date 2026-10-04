@@ -28,11 +28,14 @@
 
     <label>
       Input data (.mat or CSV). <br>
+      
       MAT: <code>Profile_Px.Px</code> (normalized EFISH \(P\)) /
       <code>Profile_Px.u</code> (phase-mismatch parameter \(u\)) /
       optional <code>Profile_Px.Ex</code> (normalized simulation benchmark \(E\), if available). <br>
+      
       CSV: exactly 109 rows of normalized \(z\), normalized EFISH \(P\). <br>
-      Note: The input profiles \(P\), \(E\), and coordinate \(z\) should be pre-normalized.
+      
+      Note: The input profiles \(P\), \(E\), and coordinate \(z\) should be pre-normalized following the preprocessing procedure in README.md.
     </label>
 
     <input id="file" type="file" accept=".csv,.txt,.mat">
