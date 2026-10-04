@@ -24,13 +24,45 @@ For DDON, the EFISH polarization is fixed to **vertical**.
 
 ### 2. Local Packaged Inference — lightweight ONNX Runtime
 
-This mode provides local DDON inference without TensorFlow. After downloading/cloning the repository:
+This mode is recommended for users who want to run DDON locally without installing TensorFlow. First clone or download this repository, open a terminal in the repository directory, and install the local package:
 
 ```bash
 pip install .
 ```
 
-Python interface:
+#### MATLAB MAT input (recommended)
+
+The recommended input is a MATLAB MAT file containing:
+
+- `Profile_Px.Px`: $[z,P_x]$, size $(109,2)$
+- `Profile_Px.u`: phase-mismatch parameter $u$, size $(109,1)$
+- `Profile_Px.Ex`: normalized benchmark electric field $E_x$, size $(109,1)$, optional
+
+Run DDON directly from the command line:
+
+```bash
+ddon predict Efish_vertical.mat -o prediction.mat
+```
+
+or save the reconstructed field as CSV:
+
+```bash
+ddon predict Efish_vertical.mat -o prediction.csv
+```
+
+For MAT input, `Profile_Px.Px` and `Profile_Px.u` are read automatically, so `--u` does not need to be specified.
+
+A typical MATLAB input file can be prepared as:
+
+```matlab
+Profile_Px.Px = [z(:), Px(:)];   % 109 x 2
+Profile_Px.u  = u * ones(109,1); % 109 x 1
+Profile_Px.Ex = Ex(:);           % 109 x 1, optional
+
+save('Efish_vertical.mat', 'Profile_Px');
+```
+
+#### Python / CSV input (optional)
 
 ```python
 from ddon import DDON
@@ -42,19 +74,13 @@ model = DDON()
 
 E = model.predict(
     values=values,
-    u=-0.068
+    u=-0.35
 )
 
 print(E)
 ```
 
-Command-line interface:
-
-```bash
-ddon predict Efish_vertical.mat -o prediction.csv
-```
-
-For MATLAB MAT input, `Profile_Px.Px` and `Profile_Px.u` are read automatically. For CSV/TXT input, provide `u` explicitly:
+For CSV/TXT command-line input, provide $u$ explicitly:
 
 ```bash
 ddon predict input.csv --u -0.35 -o prediction.mat
