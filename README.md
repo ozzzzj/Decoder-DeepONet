@@ -33,7 +33,7 @@ The web app supports preprocessed CSV and MATLAB MAT inputs and performs inferen
 
 ## Model file (DDON) and model description
 - Please download the DDON model via the release page for use (put it under the dir model log) or via: <br>
-  https://github.com/ozzzzj/Decoder-DeepONet/releases/download/DDON/20260520_09-39_AM+model.Epoch-27_Loss-0.000404+MSE-0.000244+Batsize-.512.h5
+  https://github.com/ozzzzj/Decoder-DeepONet/releases/download/DDON/20260520_model_Batsize-512.h5
 
 ## Instructions to use the model for Efield prediction:
 1. To use the model, please first interpolate the EFISH file to the following grid via MATLAB:
