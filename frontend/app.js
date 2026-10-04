@@ -1,3 +1,22 @@
+const modelSelect = document.getElementById("model");
+const polarizationSelect = document.getElementById("polarization");
+const polarizationNote = document.getElementById("polarization-note");
+
+function updateModelOptions() {
+  const model = modelSelect.value;
+  if (model === "ddon") {
+    polarizationSelect.value = "vertical";
+    polarizationSelect.disabled = true;
+    polarizationNote.textContent = "DDON is designed for vertically polarized EFISH signals.";
+  } else {
+    polarizationSelect.disabled = false;
+    polarizationNote.textContent = "PC-FDON supports vertically or horizontally polarized EFISH signals.";
+  }
+}
+
+modelSelect.addEventListener("change", updateModelOptions);
+updateModelOptions();
+
 const MODEL_URL = "./DDON.onnx";
 let rows = [], prediction = null, session = null, yTrue = null;
 const statusEl = document.getElementById("status");
