@@ -24,7 +24,17 @@
 
   <section>
     <label>Model</label>
-    <select disabled><option>DDON</option></select>
+    <select id="model">
+      <option value="ddon" selected>DDON</option>
+      <option value="pcfdon" disabled>PC-FDON (coming soon)</option>
+    </select>
+
+    <label>Polarization of EFISH</label>
+    <select id="polarization" disabled>
+      <option value="vertical" selected>Vertical</option>
+      <option value="horizontal">Horizontal</option>
+    </select>
+    <p id="polarization-note">DDON is designed for vertically polarized EFISH signals.</p>
 
     <label>Input data (.mat or CSV)</label>
 
