@@ -24,11 +24,14 @@ For DDON, the EFISH polarization is fixed to **vertical**.
 
 ### 2. Local Packaged Inference — lightweight ONNX Runtime
 
-This mode is recommended for users who want to run DDON locally without installing TensorFlow. First clone or download this repository, open a terminal in the repository directory, and install the local package:
+This mode is recommended for users who want to run DDON locally without installing TensorFlow:
 
 ```bash
-pip install .
+pip install ddon-efish
 ```
+
+**[View `ddon-efish` on PyPI](https://pypi.org/project/ddon-efish/)**
+
 
 #### MATLAB MAT input (recommended)
 
@@ -48,7 +51,35 @@ Profile_Px.Ex = Ex(:);           % 109 x 1, optional
 save('Efish_vertical.mat', 'Profile_Px');
 ```
 
-#### Python / CSV input (optional)
+Python example using the MATLAB MAT file:
+
+```python
+from ddon import DDON
+from scipy.io import loadmat
+import numpy as np
+
+mat = loadmat(
+    "Efish_vertical.mat",
+    squeeze_me=True,
+    struct_as_record=False
+)
+
+Profile = mat["Profile_Px"]
+
+values = np.asarray(Profile.Px)       # [z, Px], shape (109, 2)
+u = np.asarray(Profile.u).reshape(-1)[0]
+
+model = DDON()
+
+E = model.predict(
+    values=values,
+    u=u
+)
+
+print(E)
+```
+
+#### CSV input (optional)
 
 ```python
 from ddon import DDON
