@@ -235,7 +235,7 @@ function draw(x, y, trueY, inputP) {
   if(trueY) drawSeries(ctx,x,trueY,left,w,h,xmin,xmax,ymin,ymax,"#1769aa");
 
   ctx.fillStyle="#222"; ctx.font="14px sans-serif"; ctx.textAlign="center"; ctx.textBaseline="alphabetic";
-  ctx.fillText("Normalized z",left+w/2,c.height-8);
+  ctx.fillText("z / z_R / 50",left+w/2,c.height-8);
   ctx.save(); ctx.translate(16,yTop+h/2); ctx.rotate(-Math.PI/2);
   ctx.fillText("Normalized P / E",0,0); ctx.restore();
 
