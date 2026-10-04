@@ -53,24 +53,15 @@ ddon predict input.csv --u -0.35 -o prediction.mat
 
 The verified ONNX model is downloaded automatically on first use and cached locally. This mode requires NumPy, SciPy, and ONNX Runtime.
 
-### 3. Full Python Research Mode — TensorFlow
+### 3. Full Python Research Code — To be released
 
-Use the original TensorFlow model and scripts for full customization, validation, visualization, model analysis, and research workflows. The original filenames are retained.
+The full TensorFlow research implementation, including the original prediction, evaluation, and analysis workflow, is not included in the current public release and will be released separately in the future.
 
-## Recommended environment for the original TensorFlow model
 
-- Python 3.10.15
-- TensorFlow-gpu 2.10.1
+## Full research implementation
 
-## Main user file
+The original TensorFlow research scripts are currently withheld from the public repository. The public web app and lightweight ONNX package remain available for inference.
 
-- `DeepONet_Resnet_Exp_vFinal.py`
-
-## Script files
-
-- `self_layers.py` — self-defined model layers.
-- `PINN_Model_Predict.py` — runs model prediction, visualization, and optional MATLAB output.
-- `self_Predict_ModelResult.py` — prediction/evaluation helper used by `PINN_Model_Predict.py`.
 
 ## Model file
 
