@@ -1,4 +1,4 @@
-const MODEL_URL = "https://github.com/ozzzzj/Decoder-DeepONet/releases/download/DDON-WEB/DDON.onnx";
+const MODEL_URL = "./DDON.onnx";
 let rows = [], prediction = null, session = null, yTrue = null;
 const statusEl = document.getElementById("status");
 
