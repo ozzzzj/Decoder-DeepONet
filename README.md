@@ -42,7 +42,7 @@ model = DDON()
 
 E = model.predict(
     values=values,
-    u=-0.35
+    u=-0.068
 )
 
 print(E)
