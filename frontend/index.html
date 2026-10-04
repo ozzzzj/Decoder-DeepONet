@@ -5,6 +5,73 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>EFISH E-field Reconstruction</title>
   <link rel="stylesheet" href="./style.css">
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['\\(', '\\)'], ['
+<body>
+<main>
+  <h1>EFISH E-field Reconstruction</h1>
+  <p class="sub">Decoder-DeepONet (DDON)</p>
+  <section>
+    <label>Model</label>
+    <select disabled><option>DDON</option></select>
+    <label>Input data (.mat or CSV). <br>
+      MAT: <code>Profile_Px.Px</code> (normalized EFISH \(P\)) / <code>Profile_Px.u</code> (phase-mismatch parameter \(u\)) / optional <code>Profile_Px.Ex</code> (normalized simulation benchmark \(E\), if available). <br>
+      CSV: exactly 109 rows of normalized \(z\), normalized EFISH \(P\). <br>
+      Note: The input profiles \(P\), \(E\), and coordinate \(z\) should be pre-normalized. <br>
+    </label>
+    <input id="file" type="file" accept=".csv,.txt,.mat">
+    <label>Phase-mismatch parameter \(u\)</label>
+    <input id="u" type="number" step="any" value="-0.35">
+    <button id="run">Reconstruct E-field</button>
+    <p id="status"></p>
+  </section>
+  <section id="result" hidden>
+    <h2>Prediction</h2>
+    <canvas id="plot" width="900" height="360"></canvas>
+    <button id="download">Download CSV</button>
+  </section>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/onnxruntime-web@1.23.2/dist/ort.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/KovacsGG/mat4js@master/dist/mat4js.read.min.js"></script>
+<script src="./app.js"></script>
+</body>
+</html>
+, '
+<body>
+<main>
+  <h1>EFISH E-field Reconstruction</h1>
+  <p class="sub">Decoder-DeepONet (DDON)</p>
+  <section>
+    <label>Model</label>
+    <select disabled><option>DDON</option></select>
+    <label>Input data (.mat or CSV). <br>
+      MAT: Profile_Px.Px (normalized EFISH $P$) / Profile_Px.u / optional Profile_Px.Ex (normalized simulation benchmark $E$, if available). <br>
+      CSV: exactly 109 rows of normalized z, normalized EFISH ($P$) <br>
+      Note: Both input profiles $P$, $E$ and $z$ should be pre-normalized <br>
+    </label>
+    <input id="file" type="file" accept=".csv,.txt,.mat">
+    <label>u</label>
+    <input id="u" type="number" step="any" value="-0.35">
+    <button id="run">Reconstruct E-field</button>
+    <p id="status"></p>
+  </section>
+  <section id="result" hidden>
+    <h2>Prediction</h2>
+    <canvas id="plot" width="900" height="360"></canvas>
+    <button id="download">Download CSV</button>
+  </section>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/onnxruntime-web@1.23.2/dist/ort.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/KovacsGG/mat4js@master/dist/mat4js.read.min.js"></script>
+<script src="./app.js"></script>
+</body>
+</html>
+]] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
 </head>
 <body>
 <main>
