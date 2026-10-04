@@ -10,6 +10,14 @@ The related paper and analysis are available at the DOI 10.1088/1361-6595/ae413f
 
 **Note** Scripts and model will be available soon...  <br>
 
+## Online Web App
+
+DDON can be run directly in a web browser without installing Python or TensorFlow:
+
+**[Launch the DDON E-field Reconstruction Web App](https://ozzzzj.github.io/Decoder-DeepONet/)**
+
+The web app supports preprocessed CSV and MATLAB MAT inputs and performs inference locally in the browser using the ONNX version of DDON.
+
 ## Environment recommended (model trained on):
 - Python 3.10.15
 - TensorFlow-gpu 2.10.1
