@@ -24,7 +24,7 @@ For DDON, the EFISH polarization is fixed to **vertical**.
 
 ### 2. Local Packaged Inference — lightweight ONNX Runtime
 
-This mode is recommended for users who want to run DDON locally without installing TensorFlow:
+This mode is recommended if you want to run DDON locally, especially for predictions of multiple EFISH profiles, without installing TensorFlow:
 
 ```bash
 pip install ddon-efish
