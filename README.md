@@ -104,11 +104,6 @@ The verified ONNX model is downloaded automatically on first use and cached loca
 The full TensorFlow research implementation, including the original prediction, evaluation, and analysis workflow, is not included in the current public release and will be released separately in the future.
 
 
-## Full research implementation
-
-The original TensorFlow research scripts are currently withheld from the public repository. The public web app and lightweight ONNX package remain available for inference.
-
-
 ## Model file
 
 The current DDON TensorFlow model is available from the DDON release:
