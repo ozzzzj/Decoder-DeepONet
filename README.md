@@ -116,7 +116,7 @@ DDON uses semantic model versions in the form `vMAJOR.MINOR.PATCH` (for example,
 - **Versioned releases** such as `DDON-v1.0.0` are reproducible snapshots and are not overwritten.
 - **DDON-WEB** points to the current stable ONNX model used by the Web App and lightweight local package.
 - Updating the stable model does not change older versioned releases.
-- The current stable model is **v1.0.0**.
+- The current stable model is **v1.0**.\n- Current Python package version: **1.0.1**.
 
 ## Model file
 
