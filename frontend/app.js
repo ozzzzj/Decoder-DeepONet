@@ -159,17 +159,38 @@ function niceNumber(v) {
 
 function drawAxes(ctx,p,w,h,xmin,xmax,ymin,ymax) {
   const ticks=5;
-  ctx.strokeStyle="#222"; ctx.fillStyle="#222"; ctx.lineWidth=1; ctx.font="12px sans-serif";
-  ctx.beginPath(); ctx.moveTo(p,p); ctx.lineTo(p,p+h); ctx.lineTo(p+w,p+h); ctx.stroke();
+  ctx.font="12px sans-serif";
 
-  ctx.textAlign="center"; ctx.textBaseline="top";
+  // grid on
+  ctx.save();
+  ctx.strokeStyle="#dddddd";
+  ctx.lineWidth=1;
+  for(let i=0;i<=ticks;i++){
+    const t=i/ticks;
+    const px=p+t*w;
+    const py=p+h-t*h;
+    ctx.beginPath(); ctx.moveTo(px,p); ctx.lineTo(px,p+h); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(p,py); ctx.lineTo(p+w,py); ctx.stroke();
+  }
+  ctx.restore();
+
+  // box on
+  ctx.strokeStyle="#222";
+  ctx.lineWidth=1;
+  ctx.strokeRect(p,p,w,h);
+
+  // ticks and tick labels
+  ctx.fillStyle="#222";
+  ctx.textAlign="center";
+  ctx.textBaseline="top";
   for(let i=0;i<=ticks;i++){
     const t=i/ticks, px=p+t*w, value=xmin+t*(xmax-xmin);
     ctx.beginPath(); ctx.moveTo(px,p+h); ctx.lineTo(px,p+h+5); ctx.stroke();
     ctx.fillText(niceNumber(value),px,p+h+8);
   }
 
-  ctx.textAlign="right"; ctx.textBaseline="middle";
+  ctx.textAlign="right";
+  ctx.textBaseline="middle";
   for(let i=0;i<=ticks;i++){
     const t=i/ticks, py=p+h-t*h, value=ymin+t*(ymax-ymin);
     ctx.beginPath(); ctx.moveTo(p-5,py); ctx.lineTo(p,py); ctx.stroke();
