@@ -39,10 +39,11 @@
     <label>Input data (.mat or CSV)</label>
 
     <p>
-      <strong>MAT:</strong>
-      <code>Profile_Px.Px</code> (normalized EFISH \(P\)) /
-      <code>Profile_Px.u</code> (phase-mismatch parameter \(u\)) /
-      optional <code>Profile_Px.Ex</code> (normalized simulation benchmark \(E\), if available).
+      <strong>MAT (recommended):</strong><br>
+      <code>Profile_Px.Px</code> = \([z,\,P_x]\), size \((109,2)\): normalized \(z\) and normalized EFISH \(P_x\).<br>
+      <code>Profile_Px.u</code>, size \((109,1)\): phase-mismatch parameter \(u\).<br>
+      <code>Profile_Px.Ex</code>, size \((109,1)\): normalized benchmark electric field \(E_x\) (optional).<br>
+      Recommended MATLAB format: save the MAT file using <code>-v7</code> (not <code>-v7.3</code>).
     </p>
 
     <p>
