@@ -73,10 +73,30 @@
 
   <section class="local-package">
     <h2>Local Python Package</h2>
-    <p>Run DDON locally with the lightweight ONNX package:</p>
+    <p>Install the lightweight DDON package:</p>
     <pre><code>pip install ddon-efish</code></pre>
-    <p>For MATLAB MAT input:</p>
-    <pre><code>ddon predict Efish_vertical.mat -o prediction.mat</code></pre>
+
+    <p>Example using a MATLAB MAT file:</p>
+    <pre><code>from ddon import DDON
+from scipy.io import loadmat
+import numpy as np
+
+mat = loadmat(
+    "Efish_vertical.mat",
+    squeeze_me=True,
+    struct_as_record=False
+)
+
+Profile = mat["Profile_Px"]
+
+values = np.asarray(Profile.Px)       # [z, Px], shape (109, 2)
+u = np.asarray(Profile.u).reshape(-1)[0]
+
+model = DDON()
+E = model.predict(values=values, u=u)
+
+print(E)</code></pre>
+
     <p><a href="https://pypi.org/project/ddon-efish/" target="_blank" rel="noopener noreferrer">View ddon-efish on PyPI</a></p>
   </section>
 
