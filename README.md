@@ -152,7 +152,7 @@ For the original TensorFlow sample, place the model under the `model log` direct
 
 4. Estimate the physical phase-mismatch parameter:
 
-   $u=\Delta k\,z_R$.
+   $u=\Delta k \times z_R$.
 
    **Input the physical value of $u$ directly. Do not normalize $u$ before input.**
 
@@ -169,8 +169,8 @@ For the original TensorFlow sample, place the model under the `model log` direct
 | Structure | Field | Description |
 |---|---|---|
 | `Profile_Px` | $P_x$ | $[z,P_x]$: normalized coordinate and experimentally measured/normalized EFISH; shape $[109,2]$ |
-| `Profile_Px` | $u$ | Phase-mismatch parameter; the web/local interfaces read the raw value and apply the current DDON normalization |
-| `Profile_Px` | $E_x$ / `Ex` | Optional normalized electric-field benchmark for comparison; 109 points |
+| `Profile_Px` | $u$ | Physical phase-mismatch parameter $u=\Delta k \times z_R$; the web/local interfaces read the physical value and apply the required DDON normalization internally |
+| `Profile_Px` | `Ex` ($E_x$) | Optional normalized electric-field benchmark for comparison; 109 points |
 
 ## Web and ONNX model
 
