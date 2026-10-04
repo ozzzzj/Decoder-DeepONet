@@ -12,7 +12,7 @@ RUN pip install --no-cache-dir -r requirements-api.txt
 COPY . .
 
 ENV DDON_MODEL_PATH=/app/model/DDON.h5
-ENV DDON_MODEL_URL=https://github.com/ozzzzj/Decoder-DeepONet/releases/download/DDON/20260520_09-39_AM%2Bmodel.Epoch-27_Loss-0.000404%2BMSE-0.000244%2BBatsize-.512.h5
+ENV DDON_MODEL_URL=https://github.com/ozzzzj/Decoder-DeepONet/releases/download/DDON/20260520_model_Batsize-512.h5
 
 RUN mkdir -p /app/model \
     && curl -L --fail --retry 3 "$DDON_MODEL_URL" -o "$DDON_MODEL_PATH"
