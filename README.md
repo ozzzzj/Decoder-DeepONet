@@ -146,9 +146,11 @@ For the original TensorFlow sample, place the model under the `model log` direct
 
    Sampling points outside the experimental range may be set to zero. The input range should preferably cover at least $4.2\times\mathrm{FWHM}$ of the normalized EFISH profile.
 
-3. Normalize the measured EFISH profile along the laser propagation axis:
+3. Normalize the measured EFISH profile and, if available, the benchmark electric-field profile:
 
-   $P_{\mathrm{norm}}(z)=P(z)/P_{\max}$.
+   $P_x^{\mathrm{norm}} = P_x/\max(P_x)$,
+
+   $E_x^{\mathrm{norm}} = E_x/\max(E_x)$.
 
 4. Estimate the physical phase-mismatch parameter:
 
@@ -168,9 +170,9 @@ For the original TensorFlow sample, place the model under the `model log` direct
 
 | Structure | Field | Description |
 |---|---|---|
-| `Profile_Px` | $P_x$ | $[z,P_x]$: normalized coordinate and experimentally measured/normalized EFISH; shape $[109,2]$ |
+| `Profile_Px` | `Px` ($P_x$) | $[z,\,P_x/\max(P_x)]$: normalized coordinate and normalized EFISH; shape $[109,2]$ |
 | `Profile_Px` | $u$ | Physical phase-mismatch parameter $u=\Delta k \times z_R$; the web/local interfaces read the physical value and apply the required DDON normalization internally |
-| `Profile_Px` | `Ex` ($E_x$) | Optional normalized electric-field benchmark for comparison; 109 points |
+| `Profile_Px` | `Ex` ($E_x$) | Optional normalized electric-field benchmark $E_x/\max(E_x)$ for comparison; shape $[109,1]$ |
 
 ## Web and ONNX model
 
