@@ -55,8 +55,8 @@
       The input profiles \(P(z)\), \(E(z)\), and coordinate \(z\) should be pre-normalized and interpolated (to 109 points) following the preprocessing procedure in <a href="https://github.com/ozzzzj/Decoder-DeepONet#instructions-to-use-the-model-for-efield-prediction" target="_blank" rel="noopener noreferrer"><code>README.md</code></a>.
     </p>
 
-    <details class="preprocess-sample">
-      <summary>MATLAB preprocessing sample</summary>
+    <div class="preprocess-sample">
+      <p><strong>MATLAB preprocessing sample</strong></p>
       <pre><code>% Raw experimental data:
 % z_raw   : measurement position
 % Px_raw  : measured EFISH profile
@@ -89,7 +89,7 @@ Profile_Px.u  = u * ones(109,1);     % 109 x 1
 % Profile_Px.Ex = Ex(:);             % 109 x 1
 
 save('Efish_vertical.mat', 'Profile_Px');</code></pre>
-    </details>
+    </div>
 
     <input id="file" type="file" accept=".csv,.txt,.mat">
 
