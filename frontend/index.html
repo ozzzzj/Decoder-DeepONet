@@ -55,6 +55,42 @@
       The input profiles \(P(z)\), \(E(z)\), and coordinate \(z\) should be pre-normalized and interpolated (to 109 points) following the preprocessing procedure in <a href="https://github.com/ozzzzj/Decoder-DeepONet#instructions-to-use-the-model-for-efield-prediction" target="_blank" rel="noopener noreferrer"><code>README.md</code></a>.
     </p>
 
+    <details class="preprocess-sample">
+      <summary>MATLAB preprocessing sample</summary>
+      <pre><code>% Raw experimental data:
+% z_raw   : measurement position
+% Px_raw  : measured EFISH profile
+% zR      : Rayleigh range
+% delta_k : wave-vector mismatch
+
+z_over_zR = z_raw ./ zR;
+
+% Recommended 109-point DDON grid
+z_grid = [-50:2:-24, -22:1:-16, -15:0.5:-1.5, ...
+          -1:0.2:1, 1.5:0.5:15, 16:1:22, 24:2:50]';
+
+% Interpolate EFISH profile and normalize
+Px = interp1(z_over_zR, Px_raw, z_grid, 'linear', 0);
+Px = Px ./ max(Px);
+
+% Normalize coordinate
+z = z_grid ./ 50;
+
+% Physical phase-mismatch parameter (do not normalize manually)
+u = delta_k * zR;
+
+% Prepare MAT structure
+Profile_Px.Px = [z(:), Px(:)];       % 109 x 2
+Profile_Px.u  = u * ones(109,1);     % 109 x 1
+
+% Optional benchmark electric field:
+% Ex = interp1(zE_over_zR, Ex_raw, z_grid, 'linear', 0);
+% Ex = Ex ./ max(Ex);
+% Profile_Px.Ex = Ex(:);             % 109 x 1
+
+save('Efish_vertical.mat', 'Profile_Px');</code></pre>
+    </details>
+
     <input id="file" type="file" accept=".csv,.txt,.mat">
 
     <label>Phase-mismatch parameter \(u\)</label>
